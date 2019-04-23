@@ -50,6 +50,16 @@ const filterBtnEvent = (e) => {
   }
 };
 
+const filterByTextEvent = (e) => {
+  const searchText = e.target.value;
+  const searchLocations = locations.filter((x) => {
+    const hasName = x.name.includes(searchText);
+    const hasAddress = x.address.includes(searchText);
+    return hasName || hasAddress;
+  });
+  domStringBuilder(searchLocations);
+};
+
 const initializeLocations = () => {
   locationData.getLocationsData()
     .then((resp) => {
@@ -57,6 +67,10 @@ const initializeLocations = () => {
       locations = locationResults;
       domStringBuilder(locations);
       document.getElementById('dark').addEventListener('click', filterBtnEvent);
+      document.getElementById('evening').addEventListener('click', filterBtnEvent);
+      document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
+      document.getElementById('morning').addEventListener('click', filterBtnEvent);
+      document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
     })
     .catch(err => console.error(err));
 };

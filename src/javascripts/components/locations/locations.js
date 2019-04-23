@@ -25,9 +25,9 @@ const shootTimeClass = (shootTime) => {
   return selectedClass;
 };
 
-const domStringBuilder = () => {
+const domStringBuilder = (locArray) => {
   let domString = '';
-  locations.forEach((location) => {
+  locArray.forEach((location) => {
     domString += `<div class="bg-white text-dark locations text-center card col-2" id="${locations.id}">`;
     domString += `  <div class="card-header ${shootTimeClass(location.shootTime)}">${location.name}</div>`;
     domString += `  <img src="${location.imageUrl}" alt="image of ${locations.id}">`;
@@ -38,14 +38,27 @@ const domStringBuilder = () => {
   util.printToDom('locations', domString);
 };
 
+const filterBtnEvent = (e) => {
+  const buttonId = e.target.id;
+  const darkLocations = locations.filter(x => x.shootTime === 'After Dark');
+  switch (buttonId) {
+    case 'dark':
+      domStringBuilder(darkLocations);
+      break;
+    default:
+      domStringBuilder(locations);
+  }
+};
+
 const initializeLocations = () => {
   locationData.getLocationsData()
     .then((resp) => {
       const locationResults = resp.data.locations;
       locations = locationResults;
-      domStringBuilder();
+      domStringBuilder(locations);
+      document.getElementById('dark').addEventListener('click', filterBtnEvent);
     })
     .catch(err => console.error(err));
 };
 
-export default { initializeLocations };
+export default { initializeLocations, filterBtnEvent };

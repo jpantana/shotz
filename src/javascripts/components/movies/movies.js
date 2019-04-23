@@ -11,7 +11,7 @@ const domStringBuilder = () => {
     domString += `  <h1 class="h1 rounded-lg text-uppercase bg-primary">${movie.name}</h1>`;
     domString += '  <hr class="bg-white">';
     domString += `  <h4>${movie.genre}</h4>`;
-    domString += `  <h5>${movie.releaseDate}</h5>`;
+    domString += `  <h5 class="text-monospace">${movie.releaseDate}</h5>`;
     domString += '  <hr class="bg-white">';
     domString += `  <p><em class="text-white">Description:</em><br>${movie.description}</p>`;
     domString += `  <h5 class="text-monospace">${movie.locations.length} locations</h5>`;

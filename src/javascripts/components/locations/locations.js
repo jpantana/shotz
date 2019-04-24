@@ -1,6 +1,7 @@
 import util from '../../helpers/util';
 import locationData from '../../helpers/data/locationData';
 import './locations.scss';
+// import movies from '../movies/movies';
 
 let locations = [];
 
@@ -50,6 +51,8 @@ const filterBtnEvent = (e) => {
   }
 };
 
+const getLocations = () => locations;
+
 const filterByTextEvent = (e) => {
   const searchText = e.target.value;
   const searchLocations = locations.filter((x) => {
@@ -71,8 +74,14 @@ const initializeLocations = () => {
       document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
       document.getElementById('morning').addEventListener('click', filterBtnEvent);
       document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
+      // movies.locArray(locations);
     })
     .catch(err => console.error(err));
 };
 
-export default { initializeLocations, filterBtnEvent };
+export default {
+  initializeLocations,
+  filterBtnEvent,
+  getLocations,
+  domStringBuilder,
+};

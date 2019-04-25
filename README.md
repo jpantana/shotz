@@ -7,7 +7,7 @@ A website to keep track of movies and their shooting locations.
 
 ## Installation Instructions
 * Clone down this repo
-* at the root of the project, run `npm instal`
+* at the root of the project, run `npm install`
 
 ## How to Run
 * In your terminal, type `npm start`

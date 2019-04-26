@@ -27,6 +27,7 @@ const shootTimeClass = (shootTime) => {
 };
 
 const domStringBuilder = (locArray) => {
+  console.error(locArray);
   let domString = '';
   locArray.forEach((location) => {
     domString += `<div class="bg-white text-dark locations text-center card col-2" id="${locations.id}">`;
@@ -42,9 +43,24 @@ const domStringBuilder = (locArray) => {
 const filterBtnEvent = (e) => {
   const buttonId = e.target.id;
   const darkLocations = locations.filter(x => x.shootTime === 'After Dark');
+  const mornLocations = locations.filter(x => x.shootTime === 'Morning');
+  const eveningLocations = locations.filter(x => x.shootTime === 'Evening');
+  const afterLocations = locations.filter(x => x.shootTime === 'Afternoon');
   switch (buttonId) {
     case 'dark':
       domStringBuilder(darkLocations);
+      break;
+    case 'morning':
+      domStringBuilder(mornLocations);
+      break;
+    case 'evening':
+      domStringBuilder(eveningLocations);
+      break;
+    case 'afternoon':
+      domStringBuilder(afterLocations);
+      break;
+    case 'all':
+      domStringBuilder(locations);
       break;
     default:
       domStringBuilder(locations);
@@ -73,8 +89,8 @@ const initializeLocations = () => {
       document.getElementById('evening').addEventListener('click', filterBtnEvent);
       document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
       document.getElementById('morning').addEventListener('click', filterBtnEvent);
+      document.getElementById('all').addEventListener('click', filterBtnEvent);
       document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
-      // movies.locArray(locations);
     })
     .catch(err => console.error(err));
 };

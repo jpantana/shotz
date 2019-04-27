@@ -84,16 +84,6 @@ const initializeLocations = () => {
       const locationResults = resp.data.locations;
       locations = locationResults;
       domStringBuilder(locations);
-      document.getElementById('dark').addEventListener('click', filterBtnEvent);
-      document.getElementById('evening').addEventListener('click', filterBtnEvent);
-      document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
-      document.getElementById('morning').addEventListener('click', filterBtnEvent);
-      document.getElementById('all').addEventListener('click', filterBtnEvent);
-      document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
-      document.getElementById('movie1').addEventListener('click', singleMovie.filterMovieEvent);
-      document.getElementById('movie2').addEventListener('click', singleMovie.filterMovieEvent);
-      document.getElementById('movie3').addEventListener('click', singleMovie.filterMovieEvent);
-      document.getElementById('movie4').addEventListener('click', singleMovie.filterMovieEvent);
     })
     .catch(err => console.error(err));
 };

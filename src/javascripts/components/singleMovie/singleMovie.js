@@ -1,28 +1,55 @@
 import movies from '../movies/movies';
-import locations from '../locations/locations';
+import locationData from '../../helpers/data/locationData';
+// import util from '../../helpers/util';
+// import buttonEvents from '../buttonEvents/buttonEvents';
+// import locations from '../locations/locations';
+
+let myLocs = [];
 
 const seeAllMovies = (e) => {
   e.preventDefault();
   movies.domStringBuilder(movies);
-  locations.initializeLocations();
+  // locations.initializeLocations();
 };
+
+// const locsAgain = () => {
+//   locationData.getLocationsData()
+//     .then((resp) => {
+//       const locationResults = resp.data.locations;
+//       myLocs = locationResults;
+//       // locations.domStringBuilder(myLocs);
+//     })
+//     .catch(err => console.error(err));
+// };
 
 const filterMovieEvent = (e) => {
   const eventId = e.target.id;
-  const thisMovie = movies.movies.find(x => x.id === eventId);
+  const movie = movies.getMovies();
+  const thisMovie = movie.find(x => x.id === eventId);
   if (thisMovie) {
     movies.domStringBuilder([thisMovie]);
   } else {
-    movies.domStringBuilder(movies);
+    movies.domStringBuilder(movie);
   }
   const emptyArr = [];
-  const location = locations.getLocations();
   thisMovie.locations.forEach((id) => {
-    const thisVar = location.find(x => x.id === id);
-    emptyArr.push(thisVar);
+    const movieLocs = myLocs.filter(x => x.id === id);
+    emptyArr.push(movieLocs);
   });
-  locations.domStringBuilder(emptyArr);
+  console.error(emptyArr);
+  const locsAgain = locationData.getLocationsData()
+    .then((resp) => {
+      const locationResults = resp.data.locations;
+      myLocs = locationResults;
+      // locations.domStringBuilder(myLocs);
+    })
+    .catch(err => console.error(err));
+  console.error(locsAgain);
+  // locations.domStringBuilder(emptyArr);
   document.getElementById('seeAllMovies').addEventListener('click', seeAllMovies);
 };
 
-export default { filterMovieEvent, seeAllMovies };
+export default {
+  filterMovieEvent,
+  seeAllMovies,
+};

@@ -1,7 +1,6 @@
 import util from '../../helpers/util';
 import moviesData from '../../helpers/data/moviesData';
 // import locations from '../locations/locations';
-import singleMovie from '../singleMovie/singleMovie';
 import './movies.scss';
 
 let movies = [];
@@ -47,18 +46,28 @@ const domStringBuilder = (movArray) => {
 //   document.getElementById('seeAllMovies').addEventListener('click', seeAllMovies);
 // };
 
+// const filterMovieEvent = (e) => {
+//   const eventId = e.target.id;
+//   return eventId;
+// };
+const getMovies = () => movies;
+
 const initializeMovies = () => {
   moviesData.getMoviesData()
     .then((resp) => {
       const movieResults = resp.data.movies;
       movies = movieResults;
       domStringBuilder(movies);
-      document.getElementById('movie1').addEventListener('click', singleMovie.filterMovieEvent);
-      document.getElementById('movie2').addEventListener('click', singleMovie.filterMovieEvent);
-      document.getElementById('movie3').addEventListener('click', singleMovie.filterMovieEvent);
-      document.getElementById('movie4').addEventListener('click', singleMovie.filterMovieEvent);
+      // document.getElementById('movie1').addEventListener('click', filterMovieEvent);
+      // document.getElementById('movie2').addEventListener('click', filterMovieEvent);
+      // document.getElementById('movie3').addEventListener('click', filterMovieEvent);
+      // document.getElementById('movie4').addEventListener('click', filterMovieEvent);
     })
     .catch(err => console.error(err));
 };
 
-export default { initializeMovies };
+export default {
+  initializeMovies,
+  getMovies,
+  domStringBuilder,
+};

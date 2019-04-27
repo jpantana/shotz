@@ -23,7 +23,8 @@ const domStringBuilder = (movArray) => {
 const getMovies = () => movies;
 
 const initializeMovies = () => {
-  moviesData.getMoviesData()
+  console.error('hi');
+  return moviesData.getMoviesData()
     .then((resp) => {
       const movieResults = resp.data.movies;
       movies = movieResults;

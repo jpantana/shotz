@@ -1,7 +1,6 @@
 import util from '../../helpers/util';
 import locationData from '../../helpers/data/locationData';
 import './locations.scss';
-import singleMovie from '../singleMovie/singleMovie';
 
 let locations = [];
 
@@ -37,46 +36,10 @@ const domStringBuilder = (locArray) => {
     domString += '</div>';
   });
   util.printToDom('locations', domString);
-};
-
-const filterBtnEvent = (e) => {
-  const buttonId = e.target.id;
-  const darkLocations = locations.filter(x => x.shootTime === 'After Dark');
-  const mornLocations = locations.filter(x => x.shootTime === 'Morning');
-  const eveningLocations = locations.filter(x => x.shootTime === 'Evening');
-  const afterLocations = locations.filter(x => x.shootTime === 'Afternoon');
-  switch (buttonId) {
-    case 'dark':
-      domStringBuilder(darkLocations);
-      break;
-    case 'morning':
-      domStringBuilder(mornLocations);
-      break;
-    case 'evening':
-      domStringBuilder(eveningLocations);
-      break;
-    case 'afternoon':
-      domStringBuilder(afterLocations);
-      break;
-    case 'all':
-      domStringBuilder(locations);
-      break;
-    default:
-      domStringBuilder(locations);
-  }
+  // locationEvents.btnEvents();
 };
 
 const getLocations = () => locations;
-
-const filterByTextEvent = (e) => {
-  const searchText = e.target.value;
-  const searchLocations = locations.filter((x) => {
-    const hasName = x.name.includes(searchText);
-    const hasAddress = x.address.includes(searchText);
-    return hasName || hasAddress;
-  });
-  domStringBuilder(searchLocations);
-};
 
 const initializeLocations = () => {
   locationData.getLocationsData()
@@ -90,8 +53,6 @@ const initializeLocations = () => {
 
 export default {
   initializeLocations,
-  filterBtnEvent,
   getLocations,
   domStringBuilder,
-  filterByTextEvent,
 };

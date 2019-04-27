@@ -1,26 +1,12 @@
 import movies from '../movies/movies';
 import locationData from '../../helpers/data/locationData';
-// import util from '../../helpers/util';
-// import buttonEvents from '../buttonEvents/buttonEvents';
-// import locations from '../locations/locations';
 
 let myLocs = [];
 
 const seeAllMovies = (e) => {
   e.preventDefault();
   movies.domStringBuilder(movies);
-  // locations.initializeLocations();
 };
-
-// const locsAgain = () => {
-//   locationData.getLocationsData()
-//     .then((resp) => {
-//       const locationResults = resp.data.locations;
-//       myLocs = locationResults;
-//       // locations.domStringBuilder(myLocs);
-//     })
-//     .catch(err => console.error(err));
-// };
 
 const filterMovieEvent = (e) => {
   const eventId = e.target.id;

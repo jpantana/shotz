@@ -2,7 +2,6 @@ import util from '../../helpers/util';
 import locationData from '../../helpers/data/locationData';
 import './locations.scss';
 import singleMovie from '../singleMovie/singleMovie';
-// import movies from '../movies/movies';
 
 let locations = [];
 
@@ -28,7 +27,6 @@ const shootTimeClass = (shootTime) => {
 };
 
 const domStringBuilder = (locArray) => {
-  // console.error(locArray);
   let domString = '';
   locArray.forEach((location) => {
     domString += `<div class="bg-white text-dark locations text-center card col-2" id="${locations.id}">`;
@@ -86,12 +84,12 @@ const initializeLocations = () => {
       const locationResults = resp.data.locations;
       locations = locationResults;
       domStringBuilder(locations);
-      document.getElementById('dark').addEventListener('click', locations.filterBtnEvent);
-      document.getElementById('evening').addEventListener('click', locations.filterBtnEvent);
-      document.getElementById('afternoon').addEventListener('click', locations.filterBtnEvent);
-      document.getElementById('morning').addEventListener('click', locations.filterBtnEvent);
-      document.getElementById('all').addEventListener('click', locations.filterBtnEvent);
-      document.getElementById('search-input').addEventListener('keyup', locations.filterByTextEvent);
+      document.getElementById('dark').addEventListener('click', filterBtnEvent);
+      document.getElementById('evening').addEventListener('click', filterBtnEvent);
+      document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
+      document.getElementById('morning').addEventListener('click', filterBtnEvent);
+      document.getElementById('all').addEventListener('click', filterBtnEvent);
+      document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
       document.getElementById('movie1').addEventListener('click', singleMovie.filterMovieEvent);
       document.getElementById('movie2').addEventListener('click', singleMovie.filterMovieEvent);
       document.getElementById('movie3').addEventListener('click', singleMovie.filterMovieEvent);

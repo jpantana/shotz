@@ -18,7 +18,6 @@ const filterMovieEvent = (e) => {
   locations.domStringBuilder(emptyArr);
 };
 
-
 const filterBtnEvent = (e) => {
   const location = locations.getLocations();
   const buttonId = e.target.id;
@@ -40,11 +39,26 @@ const filterBtnEvent = (e) => {
       locations.domStringBuilder(afterLocations);
       break;
     case 'all':
-      locations.domStringBuilder(locations);
+      locations.domStringBuilder(locations.getLocations());
       break;
     default:
-      locations.domStringBuilder(locations);
+      locations.domStringBuilder(locations.getLocations());
   }
+};
+
+const filterByTextEvent = (e) => {
+  const searchText = e.target.value;
+  const searchLocations = locations.getLocations().filter((x) => {
+    const hasName = x.name.includes(searchText);
+    const hasAddress = x.address.includes(searchText);
+    return hasName || hasAddress;
+  });
+  locations.domStringBuilder(searchLocations);
+};
+
+const seeAll = () => {
+  movies.domStringBuilder(movies.getMovies());
+  locations.domStringBuilder(locations.getLocations());
 };
 
 const btnEvents = () => {
@@ -53,7 +67,7 @@ const btnEvents = () => {
   document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
   document.getElementById('evening').addEventListener('click', filterBtnEvent);
   document.getElementById('dark').addEventListener('click', filterBtnEvent);
-  // document.getElementById('dark').addEventListener('keyup', filterBtnEvent); // search bar
+  document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
 };
 
 const movieEvents = () => {
@@ -61,6 +75,7 @@ const movieEvents = () => {
   document.getElementById('movie2').addEventListener('click', filterMovieEvent);
   document.getElementById('movie3').addEventListener('click', filterMovieEvent);
   document.getElementById('movie4').addEventListener('click', filterMovieEvent);
+  document.getElementById('seeAllMovies').addEventListener('click', seeAll);
 };
 
 export default { btnEvents, movieEvents };

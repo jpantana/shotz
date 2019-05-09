@@ -4,6 +4,7 @@
 A website to keep track of movies and their shooting locations.
 
 ## Screenshots
+![Image of the Shotz website.](https://raw.githubusercontent.com/jpantana/shotz/master/screenshots/shotz.png "screenshot of Shotz site.")
 
 ## Installation Instructions
 * Clone down this repo

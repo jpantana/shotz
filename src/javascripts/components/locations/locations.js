@@ -1,7 +1,6 @@
 import util from '../../helpers/util';
 import locationData from '../../helpers/data/locationData';
 import './locations.scss';
-// import movies from '../movies/movies';
 
 let locations = [];
 
@@ -37,31 +36,10 @@ const domStringBuilder = (locArray) => {
     domString += '</div>';
   });
   util.printToDom('locations', domString);
-};
-
-const filterBtnEvent = (e) => {
-  const buttonId = e.target.id;
-  const darkLocations = locations.filter(x => x.shootTime === 'After Dark');
-  switch (buttonId) {
-    case 'dark':
-      domStringBuilder(darkLocations);
-      break;
-    default:
-      domStringBuilder(locations);
-  }
+  // locationEvents.btnEvents();
 };
 
 const getLocations = () => locations;
-
-const filterByTextEvent = (e) => {
-  const searchText = e.target.value;
-  const searchLocations = locations.filter((x) => {
-    const hasName = x.name.includes(searchText);
-    const hasAddress = x.address.includes(searchText);
-    return hasName || hasAddress;
-  });
-  domStringBuilder(searchLocations);
-};
 
 const initializeLocations = () => {
   locationData.getLocationsData()
@@ -69,19 +47,12 @@ const initializeLocations = () => {
       const locationResults = resp.data.locations;
       locations = locationResults;
       domStringBuilder(locations);
-      document.getElementById('dark').addEventListener('click', filterBtnEvent);
-      document.getElementById('evening').addEventListener('click', filterBtnEvent);
-      document.getElementById('afternoon').addEventListener('click', filterBtnEvent);
-      document.getElementById('morning').addEventListener('click', filterBtnEvent);
-      document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
-      // movies.locArray(locations);
     })
     .catch(err => console.error(err));
 };
 
 export default {
   initializeLocations,
-  filterBtnEvent,
   getLocations,
   domStringBuilder,
 };
